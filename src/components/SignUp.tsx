@@ -66,7 +66,7 @@ export default function SignUp() {
               name="username"
               autoComplete="username"
               autoFocus
-              error={error.field == 0}
+              error={error.field == 0  && !!error.message}
               helperText={error.field == 0 && error.message ? error.message : ''}
             />
             <TextField
@@ -77,7 +77,7 @@ export default function SignUp() {
               label="Email Address"
               name="email"
               autoComplete="email"
-              error={error.field == 1}
+              error={error.field == 1  && !!error.message}
               helperText={error.field == 1 && error.message ? error.message : ''}
             />
             <TextField
@@ -89,7 +89,7 @@ export default function SignUp() {
               type="password"
               id="password"
               autoComplete="current-password"
-              error={error.field == 2}
+              error={error.field == 2  && !!error.message}
               helperText={error.field == 2 && error.message ? error.message : ''}
             />
             <Button

@@ -66,7 +66,7 @@ export default function SignIn() {
               label="Username"
               name="username"
               autoComplete="username"
-              error={error.field == 0}
+              error={error.field == 0 && !!error.message}
               helperText={error.field == 0 && error.message ? error.message : ''}
               autoFocus
             />
@@ -79,7 +79,7 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
-              error={error.field == 1}
+              error={error.field == 1 && !!error.message}
               helperText={error.field == 1 && error.message ? error.message : ''}
             />
             <Button
