@@ -16,8 +16,6 @@ export default function SignIn() {
     const { signin } = useSignin();
     const navigate = useNavigate();
 
-    React.useEffect(() => { console.log('base url: ', import.meta.env.VITE_PUBLIC_API_BASE_URL)}, [])
-
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
