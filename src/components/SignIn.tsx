@@ -67,7 +67,7 @@ export default function SignIn() {
               name="username"
               autoComplete="username"
               error={error.field == 0}
-              helperText={error.field == 0 ? error.message : ''}
+              helperText={error.field == 0 && error.message ? error.message : ''}
               autoFocus
             />
             <TextField
@@ -80,7 +80,7 @@ export default function SignIn() {
               id="password"
               autoComplete="current-password"
               error={error.field == 1}
-              helperText={error.field == 1 ? error.message : ''}
+              helperText={error.field == 1 && error.message ? error.message : ''}
             />
             <Button
               type="submit"

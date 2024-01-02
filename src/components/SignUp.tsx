@@ -67,7 +67,7 @@ export default function SignUp() {
               autoComplete="username"
               autoFocus
               error={error.field == 0}
-              helperText={error.field == 0 ? error.message : ''}
+              helperText={error.field == 0 && error.message ? error.message : ''}
             />
             <TextField
               margin="normal"
@@ -78,7 +78,7 @@ export default function SignUp() {
               name="email"
               autoComplete="email"
               error={error.field == 1}
-              helperText={error.field == 1 ? error.message : ''}
+              helperText={error.field == 1 && error.message ? error.message : ''}
             />
             <TextField
               margin="normal"
@@ -90,7 +90,7 @@ export default function SignUp() {
               id="password"
               autoComplete="current-password"
               error={error.field == 2}
-              helperText={error.field == 2 ? error.message : ''}
+              helperText={error.field == 2 && error.message ? error.message : ''}
             />
             <Button
               type="submit"
