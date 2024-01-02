@@ -15,6 +15,7 @@ import { useSignin } from '../api/api';
 export default function SignIn() {
     const { signin } = useSignin();
     const navigate = useNavigate();
+    const [error, setError] = React.useState('');
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -22,8 +23,8 @@ export default function SignIn() {
         try {
             await signin(data.get('username') as string, data.get('password') as string);
             navigate('/search');
-        } catch(err) {
-            console.log(err);
+        } catch(err: any) {
+            setError(err.message);
         }
     };
 
@@ -54,6 +55,8 @@ export default function SignIn() {
               label="Username"
               name="username"
               autoComplete="username"
+              error={!!error}
+              helperText={error}
               autoFocus
             />
             <TextField

@@ -15,6 +15,7 @@ import { useSignup } from '../api/api';
 export default function SignUp() {
     const { signup } = useSignup();
     const navigate = useNavigate();
+    const [error, setError] = React.useState('');
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -23,8 +24,8 @@ export default function SignUp() {
     try {
         await signup(data.get('username') as string, data.get('email') as string, data.get('password') as string);
         navigate('/search');
-    } catch(err) {
-        console.log(err);
+    } catch(err: any) {
+        setError(err.message);
     }
   };
 
@@ -56,6 +57,8 @@ export default function SignUp() {
               name="username"
               autoComplete="username"
               autoFocus
+              error={!!error}
+              helperText={error}
             />
             <TextField
               margin="normal"

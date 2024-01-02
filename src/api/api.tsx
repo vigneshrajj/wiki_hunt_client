@@ -119,7 +119,7 @@ export function useSignin() {
         const res = await mutateFn({
             variables: {username, password},
         });
-        if (error || res.errors) return error;
+        if (error || res.errors) return res.errors;
         localStorage.setItem('refreshToken', res.data.tokenAuth.refreshToken);
         localStorage.setItem('token', res.data.tokenAuth.token);
         return res;
