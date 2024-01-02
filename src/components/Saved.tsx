@@ -16,7 +16,7 @@ const Saved = () => {
     }, [])
 
     useEffect(() => {
-        setTags(tagsData.tag.map((tag: any) => tag.name));
+        setTags(tagsData?.tag?.map((tag: any) => tag.name));
     }, [tagsData])
 
     useEffect(() => {
