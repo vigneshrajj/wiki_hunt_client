@@ -9,12 +9,15 @@ const Saved = () => {
     const [tags, setTags] = useState<string[]>([]);
     const [selectedTags, setSelectedTags] = useState<string[]>([]);
     const { getSavedArticles } = useGetSavedArticles();
-    const { getTags } = useGetTags();
+    const { getTags, tagsData } = useGetTags();
 
-    const reloadTags = () => {
-        getTags().then((res: any) => setTags(res.data.tag.map((tag: any) => tag.name)));
-    };
-    useEffect(reloadTags, [])
+    useEffect(() => {
+        getTags();
+    }, [])
+
+    useEffect(() => {
+        setTags(tagsData.tag.map((tag: any) => tag.name));
+    }, [tagsData])
 
     useEffect(() => {
         getSavedArticles(selectedTags).then((res: any) => {
@@ -52,7 +55,6 @@ const Saved = () => {
                             tags: article.tags, 
                             isStored: true,
                             allTags: tags,
-                            reloadTags: reloadTags,
                         }} />
                     </Grid>
                 )) : (

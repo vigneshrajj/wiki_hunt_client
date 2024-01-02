@@ -202,14 +202,16 @@ export function useGetSavedArticles() {
 }
 
 export function useGetTags() {
-    const [queryFn] = useLazyQuery(GET_TAGS);
+    const [queryFn, { data }] = useLazyQuery(GET_TAGS, {
+        pollInterval: 500,
+    });
 
     const getTags = async () => {
         const res = await queryFn();
         return res;
     }
 
-    return {getTags};
+    return {getTags, tagsData: data };
 }
 
 export function useAddTag() {

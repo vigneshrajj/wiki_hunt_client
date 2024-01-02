@@ -15,17 +15,26 @@ import { useSignup } from '../api/api';
 export default function SignUp() {
     const { signup } = useSignup();
     const navigate = useNavigate();
-    const [error, setError] = React.useState('');
+    const [error, setError] = React.useState({ field: 0, message: '' });
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    
+    let idx = 0;
+    for (var pair of data.entries()) {
+      if (!pair[1]) {
+        setError({ field: idx, message: 'Please fill all the fields' });
+        return;
+      }
+      idx++;
+    }
 
     try {
         await signup(data.get('username') as string, data.get('email') as string, data.get('password') as string);
         navigate('/search');
     } catch(err: any) {
-        setError(err.message);
+        setError({ field: 0, message: err.message });
     }
   };
 
@@ -57,8 +66,8 @@ export default function SignUp() {
               name="username"
               autoComplete="username"
               autoFocus
-              error={!!error}
-              helperText={error}
+              error={error.field == 0}
+              helperText={error.field == 0 ? error.message : ''}
             />
             <TextField
               margin="normal"
@@ -68,6 +77,8 @@ export default function SignUp() {
               label="Email Address"
               name="email"
               autoComplete="email"
+              error={error.field == 1}
+              helperText={error.field == 1 ? error.message : ''}
             />
             <TextField
               margin="normal"
@@ -78,6 +89,8 @@ export default function SignUp() {
               type="password"
               id="password"
               autoComplete="current-password"
+              error={error.field == 2}
+              helperText={error.field == 2 ? error.message : ''}
             />
             <Button
               type="submit"

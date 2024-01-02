@@ -8,10 +8,9 @@ type ArticleProps = Article & {
     isSaved?: boolean;
     isStored?: boolean;
     allTags?: string[];
-    reloadTags?: () => void;
 } 
 
-function Article({ pageid, title, fullurl, snippet, isSaved, isStored, tags, allTags, reloadTags }: ArticleProps) {
+function Article({ pageid, title, fullurl, snippet, isSaved, isStored, tags, allTags }: ArticleProps) {
     const [saveStatus, setSaveStatus] = useState(false); 
     const [selectedTags, setSelectedTags] = useState<string[]>(tags || []);
 
@@ -31,7 +30,6 @@ function Article({ pageid, title, fullurl, snippet, isSaved, isStored, tags, all
             case 'selectOption':
                 const selectedTag = value.filter(tag => selectedTags.indexOf(tag) == -1)[0];
                 addTag(selectedTag, pageid);
-                reloadTags?.();
                 break;
             case 'removeOption':
                 const removedTag = selectedTags.filter(tag => value.indexOf(tag) == -1)[0];

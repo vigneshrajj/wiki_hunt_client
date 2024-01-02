@@ -15,16 +15,27 @@ import { useSignin } from '../api/api';
 export default function SignIn() {
     const { signin } = useSignin();
     const navigate = useNavigate();
-    const [error, setError] = React.useState('');
+    const [error, setError] = React.useState({ field: 0, message: '' });
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
+        
+        let idx = 0;
+        for (var pair of data.entries()) {
+          if (!pair[1]) {
+            setError({ field: idx, message: 'Please fill all the fields' });
+            return;
+          }
+          idx++;
+        }
+
         try {
             await signin(data.get('username') as string, data.get('password') as string);
             navigate('/search');
         } catch(err: any) {
             setError(err.message);
+            setError({ field: 0, message: err.message });
         }
     };
 
@@ -55,8 +66,8 @@ export default function SignIn() {
               label="Username"
               name="username"
               autoComplete="username"
-              error={!!error}
-              helperText={error}
+              error={error.field == 0}
+              helperText={error.field == 0 ? error.message : ''}
               autoFocus
             />
             <TextField
@@ -68,6 +79,8 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              error={error.field == 1}
+              helperText={error.field == 1 ? error.message : ''}
             />
             <Button
               type="submit"
