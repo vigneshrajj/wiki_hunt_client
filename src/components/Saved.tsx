@@ -29,7 +29,7 @@ const Saved = () => {
         <Autocomplete
             multiple
             options={tags}
-            onChange={(e, val) => setSelectedTags(val)}
+            onChange={(_e, val) => setSelectedTags(val)}
             filterSelectedOptions
             sx={{ mx: 2 }}
             renderInput={(params) => (

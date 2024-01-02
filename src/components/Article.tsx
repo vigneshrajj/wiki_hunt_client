@@ -25,7 +25,7 @@ function Article({ pageid, title, fullurl, snippet, isSaved, isStored, tags, all
         setSaveStatus(true);
     }
 
-    const handleTagUpdate = (event: React.SyntheticEvent, value: string[], reason: string) => {
+    const handleTagUpdate = (_event: React.SyntheticEvent, value: string[], reason: string) => {
         switch(reason) {
             case 'createOption':
             case 'selectOption':

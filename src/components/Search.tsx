@@ -108,7 +108,7 @@ function Search() {
         </Grid>
       </Box>
       <Stack py={2} alignItems={'center'} width={'100%'}>
-        <Pagination count={totalPages} page={page} onChange={(e, val) => {
+        <Pagination count={totalPages} page={page} onChange={(_e, val) => {
           setPage(val);
           requestArticles(query, val);
         }} />
