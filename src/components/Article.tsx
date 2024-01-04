@@ -2,13 +2,7 @@ import { BookmarkAddOutlined, BookmarkAddedOutlined, OpenInNewRounded } from "@m
 import { Autocomplete, Box, Button, Stack, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import { useAddTag, useRemoveTag, useSaveArticle } from "../api/api";
-import { Article } from "../types/types";
-
-type ArticleProps = Article & {
-    isSaved?: boolean;
-    isStored?: boolean;
-    allTags?: string[];
-} 
+import { ArticleProps } from "../types/types";
 
 function Article({ pageid, title, fullurl, snippet, isSaved, isStored, tags, allTags }: ArticleProps) {
     const [saveStatus, setSaveStatus] = useState(false); 

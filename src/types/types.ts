@@ -13,3 +13,9 @@ export interface SavedArticle {
     url: string;
     tags?: string[];
 }
+
+export type ArticleProps = Article & {
+    isSaved?: boolean;
+    isStored?: boolean;
+    allTags?: string[];
+} 
