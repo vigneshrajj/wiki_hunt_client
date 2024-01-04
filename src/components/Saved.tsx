@@ -31,7 +31,7 @@ const Saved = () => {
     <>
         <Autocomplete
             multiple
-            options={tags}
+            options={tags || []}
             onChange={(_e, val) => setSelectedTags(val)}
             filterSelectedOptions
             sx={{ mx: 2 }}
